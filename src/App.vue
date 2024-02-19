@@ -1,17 +1,25 @@
 <script setup>
 	import { ref, computed } from 'vue';
+	import { useToast } from 'vue-toastification';
+	import { nanoid } from 'nanoid';
 	import Header from './components/Header.vue';
 	import Balance from './components/Balance.vue';
 	import IncomeExpenses from './components/IncomeExpenses.vue';
 	import TransactionsList from './components/TransactionsList.vue';
 	import AddTransactions from './components/AddTransactions.vue';
 
+	const toast = useToast();
 	const transactions = ref([
-		{ id: 1, text: 'Flower', amount: -20.99 },
-		{ id: 2, text: 'Salary', amount: 300.67 },
-		{ id: 3, text: 'Book', amount: -10 },
-		{ id: 4, text: 'Camera', amount: 150 },
+		{ id: nanoid(), text: 'Flower', amount: -20.99 },
+		{ id: nanoid(), text: 'Salary', amount: 300.67 },
+		{ id: nanoid(), text: 'Book', amount: -10 },
+		{ id: nanoid(), text: 'Camera', amount: 150 },
 	]);
+
+	const addTransaction = (transactionData) => {
+		transactions.value.push(transactionData);
+		toast.success('Transaction added');
+	};
 
 	const total = computed(() => {
 		return transactions.value.reduce((acc, curr) => {
@@ -47,7 +55,7 @@
 			<Balance :total="total" />
 			<IncomeExpenses :income="income" :expenses="expenses" />
 			<TransactionsList :transactions="transactions" />
-			<AddTransactions />
+			<AddTransactions @addTransaction="addTransaction" />
 		</div>
 	</main>
 </template>
