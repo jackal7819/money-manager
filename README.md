@@ -2,7 +2,7 @@
 
 Money Manager is an application for tracking expenses and incomes, designed to help you easily manage your budget. It allows you to add new transactions, view your current balance, and automatically calculate total expenses and incomes.
 
-### Functionality
+## Functionality
 
 1. **Adding transactions:** Click on the "Add Transaction" button and enter the necessary information about the transaction (amount and description).
 2. **Viewing balance:** The top section of the application displays the current balance, as well as the total expenses and incomes.
