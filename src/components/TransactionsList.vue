@@ -3,8 +3,13 @@
 		transactions: {
 			type: Array,
 			required: true,
-		}
-	})
+		},
+	});
+	
+	const emit = defineEmits(['deleteTransaction']);
+	const deleteTransaction = (id) => {
+		emit('deleteTransaction', id);
+	}
 </script>
 
 <template>
@@ -21,6 +26,7 @@
 			{{ transaction.text }}
 			<span>{{ transaction.amount.toFixed(2) }}€</span
 			><button
+				@click="deleteTransaction(transaction.id)"
 				class="absolute text-red-500 transition-all duration-1000 opacity-0 -left-5 group-hover:opacity-100"
 			>
 				&#10006;

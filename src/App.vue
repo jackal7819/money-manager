@@ -21,6 +21,12 @@
 		toast.success('Transaction added');
 	};
 
+	const deleteTransaction = (id) => {
+		transactions.value = transactions.value.filter(
+			(transaction) => transaction.id !== id
+		);
+	};
+
 	const total = computed(() => {
 		return transactions.value.reduce((acc, curr) => {
 			return acc + curr.amount;
@@ -54,7 +60,10 @@
 			<Header />
 			<Balance :total="total" />
 			<IncomeExpenses :income="income" :expenses="expenses" />
-			<TransactionsList :transactions="transactions" />
+			<TransactionsList
+				:transactions="transactions"
+				@deleteTransaction="deleteTransaction"
+			/>
 			<AddTransactions @addTransaction="addTransaction" />
 		</div>
 	</main>
